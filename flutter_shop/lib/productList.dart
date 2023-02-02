@@ -17,17 +17,20 @@ class product extends StatelessWidget{
             ),
             Categories(),
             Expanded(
-              child: GridView.builder(
-                gridDelegate: 
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-                  itemBuilder: (context, index) => ItemCard(),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 5),
-            //   child: Text(products[0].title, style: TextStyle(fontFamily: 'DM'),),
-            // ),
-            // Text("\$234", style: TextStyle(fontFamily: 'DM',fontWeight: FontWeight.bold),)
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.builder(
+                  itemCount: products.length,
+                  gridDelegate: 
+                    SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 0.7,), 
+                    itemBuilder: (context, index) => ItemCard(product: products[index],),
             ),
-            )
+              ),
+            ),
             ],
     );
   }
@@ -35,12 +38,14 @@ class product extends StatelessWidget{
 }
 
 class ItemCard extends StatelessWidget {
-  final Product? product;
+  final Product product;
   final Function? press;
+  // final Product? product;
+  // final Function? press;
   const ItemCard({
     Key? key, 
-    this.product, 
-   this.press,
+    required this.product, 
+    this.press,
   }) : super(key: key);
 
   @override
@@ -48,25 +53,27 @@ class ItemCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.all(20),
-          height: 180,
-          width: 160,
-          decoration: BoxDecoration(
-            color: products[0].color,
-            borderRadius: BorderRadius.circular(16)
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            // height: 180,
+            // width: 160,
+            decoration: BoxDecoration(
+              color: product.color,
+              borderRadius: BorderRadius.circular(16)
+            ),
+            child: Image.asset(product!.image),
           ),
-          child: Image.asset(products[0].image),
         ),
         Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Text(
-        products[0].title,
+        product!.title,
         style: TextStyle(fontFamily: 'DM'),
       ),
     ),
     Text(
-      "\$234",
+      "\$${product?.price}",
       style: TextStyle(fontFamily: 'DM', fontWeight: FontWeight.bold),
     )
       ],
@@ -77,8 +84,10 @@ class ItemCard extends StatelessWidget {
 
 // stateful widget for the categories
 
+// ignore: use_key_in_widget_constructors
 class Categories extends StatefulWidget{
   @override
+  // ignore: library_private_types_in_public_api
   _CategoriesState createState() => _CategoriesState();
 
 }
@@ -141,3 +150,11 @@ Widget buildCategory(int index) {
 //         ),
 //       )],
 //     );
+
+
+
+// Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 5),
+            //   child: Text(products[0].title, style: TextStyle(fontFamily: 'DM'),),
+            // ),
+            // Text("\$234", style: TextStyle(fontFamily: 'DM',fontWeight: FontWeight.bold),)
