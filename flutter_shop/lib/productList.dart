@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/database/stock.dart';
+import 'package:flutter_shop/details_screen.dart';
+
+import 'itemCard.dart';
 
 class product extends StatelessWidget{
   const product({super.key});
@@ -27,59 +30,67 @@ class product extends StatelessWidget{
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
                       childAspectRatio: 0.7,), 
-                    itemBuilder: (context, index) => ItemCard(product: products[index],),
+                    itemBuilder: (context, index) => ItemCard(product: products[index], press: () => Navigator.push(
+                    context, MaterialPageRoute(
+                    builder: (context) => ProductDetails(product: products[index],
+                    ),
+                    )),
+                    )
             ),
               ),
             ),
-            ],
+    ],
     );
   }
 
 }
 
-class ItemCard extends StatelessWidget {
-  final Product product;
-  final Function? press;
-  // final Product? product;
-  // final Function? press;
-  const ItemCard({
-    Key? key, 
-    required this.product, 
-    this.press,
-  }) : super(key: key);
+// class ItemCard extends StatelessWidget {
+//   final Product product;
+//   final Function press;
+//   // final Product? product;
+//   // final Function? press;
+//   const ItemCard({
+//     Key? key, 
+//     required this.product, 
+//     required this.press,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(20),
-            // height: 180,
-            // width: 160,
-            decoration: BoxDecoration(
-              color: product.color,
-              borderRadius: BorderRadius.circular(16)
-            ),
-            child: Image.asset(product!.image),
-          ),
-        ),
-        Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Text(
-        product!.title,
-        style: TextStyle(fontFamily: 'DM'),
-      ),
-    ),
-    Text(
-      "\$${product?.price}",
-      style: TextStyle(fontFamily: 'DM', fontWeight: FontWeight.bold),
-    )
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: press,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Expanded(
+//             child: Container(
+//               padding: EdgeInsets.all(20),
+//               // height: 180,
+//               // width: 160,
+//               decoration: BoxDecoration(
+//                 color: product.color,
+//                 borderRadius: BorderRadius.circular(16)
+//               ),
+//               child: Image.asset(product!.image),
+//             ),
+//           ),
+//           Padding(
+//         padding: const EdgeInsets.symmetric(vertical: 5),
+//         child: Text(
+//           product!.title,
+//           style: TextStyle(fontFamily: 'DM'),
+//         ),
+//       ),
+//       Text(
+//         "\$${product?.price}",
+//         style: TextStyle(fontFamily: 'DM', fontWeight: FontWeight.bold),
+//       )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 // stateful widget for the categories
@@ -93,7 +104,7 @@ class Categories extends StatefulWidget{
 }
 
 class _CategoriesState extends State<Categories> {
-  List<String> categories = ["Hand Bag", "Jewellery", "Footwear", "Dresses"];
+  List<String> categories = ["Hand Bag", "Jewellery", "Footwear", "Dresses","Workout","T-shirts"];
   // Will automatically be set as 0
   int selectedIndex = 0;
   @override
