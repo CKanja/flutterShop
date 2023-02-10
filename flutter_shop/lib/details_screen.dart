@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/body.dart';
+//import 'package:flutter_shop/body.dart';
 import 'package:flutter_shop/database/stock.dart';
+import './detail_body.dart';
 
 class ProductDetails extends StatelessWidget{
   final Product product;
@@ -12,17 +13,17 @@ const ProductDetails({super.key, required this.product});
     return Scaffold(
       backgroundColor: product.color,
       appBar: buildAppBar(context),
-      body: Body(),
+      body: Body(product: product),
     );
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: product.color,
       elevation: 0,
       // leading: const Icon(Icons.arrow_back_sharp),
       leading: BackButton(
-        color: Colors.blueGrey,
+        color: Colors.white,
         onPressed: () => Navigator.pop(context),
       ),
       actions: <Widget>[
@@ -30,13 +31,13 @@ const ProductDetails({super.key, required this.product});
             onPressed: () => Navigator.pop(context),
             icon: const Icon(
               Icons.search,
-              color: Colors.blueGrey,
+              color: Colors.white,
             )),
         IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.shopping_cart_outlined,
-              color: Colors.blueGrey,
+              color: Colors.white,
             )
             ),
             SizedBox( width: 10)

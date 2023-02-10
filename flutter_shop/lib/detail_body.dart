@@ -16,13 +16,16 @@ class Body extends StatelessWidget{
           SizedBox(
             height: size.height,
             child: Stack(
-              children: [
-                Text("HI"),
+              children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.3),
-                  height: 800,
-                  decoration: BoxDecoration(
-                    color: Colors.white
+                  height: 500,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30)
+                    )
                   ),
                 )
               ],
